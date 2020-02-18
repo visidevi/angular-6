@@ -13,8 +13,8 @@ import { Routes, RouterModule } from '@angular/router';
    { path: '', component: HomeComponent},
    { path: 'home', component: HomeComponent},
    { path: 'login', component: LoginComponent},
-   { path: 'Conversation', component: ConversationComponent},
-   { path: 'Profile', component: ProfileComponent},
+   { path: 'conversation', component: ConversationComponent},
+   { path: 'profile', component: ProfileComponent},
  ]
 @NgModule({
   declarations: [
