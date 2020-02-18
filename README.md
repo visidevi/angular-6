@@ -80,3 +80,24 @@ Como parte de la estructura del proyecto econtramos el archivo /package.json/ y 
 La carpeta /src contienen los archivos con el código que vamos a editar. Los más importantes son: los css, el index.html que es donde corre toda la aplicación ya que, como vimos, Angular genera una SPA (aplicación de una sóla página).
 También encontramos la carpeta /app donde están los archivos principales, que editaremos para crear nuestra aplicación, como es el caso de: app.component.css, app.component.html, app.component.spec.ts, app.component.ts y app.modules.ts.
 Tenemos también la carpeta /assets, que con tiene todos los recursos estáticos usados por la aplicación
+### Navegación básica entre componentes
+Para implementar ruteo, que es la capacidad de navegar entre componentes (vistas) en Angular, es necesario importar Routes desde @angular/router en el componente base de nuestra app:
+
+import { Routes } from '@angular/router';
+Luego se deben declarar todas las rutas que vamos a usar en una constante de tipo Routes:
+
+...
+const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent }
+];
+...
+Se incluyen todas las rutas definidas como elementos de un arreglo de objetos json de JS.
+La propiedad path va a comparar el segmento coincidente en la url, mientras que component indica hacia cuál componente se va a navegar.
+
+Para hacer funcionar las rutas en nuestra app, se debe importar el módulo RouterModule en la sección imports del app.component.ts ya que éste no se importa de manera automática.
+
+Finalmente para implementar la navegación en nuestra app, es necesario indicar en el contenido de app.component.html una directiva <router-outlet></router-outlet> que se utilizará para inyectar eventualmente los componentes de toda la navegación que hemos definido. Todo lo que se coloque en el html, fuera de esta directiva, quedará fijado como contenido común en todas las vistas de nuestra navegación.
+
+Es importante tener en cuenta que al usar enlaces o anclas ( <a> ... </a> ) de html, tendremos que sustituir el atributo href por routerLink, que es parte de RouterModule, para evitar la recarga completa de la página y la latencia, ya que esto iría en contra del concepto fundamental de lo que es una SPA (single page app).
