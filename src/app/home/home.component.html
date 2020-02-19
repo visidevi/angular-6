@@ -1,9 +1,11 @@
 
 <ng-container *ngFor="let item of friends; let i = index">
     <p *ngIf="item.friend">
-        {{item.nick}}
-        {{ i }}
-        {{ item.status }} <br>
+         <a routerLink="/conversation/{{item.uid}}">
+            {{item.nick}} |
+        {{ i }}|
+        {{ item.status }}|
+         </a>
     </p>
 </ng-container>
 no amigos_____

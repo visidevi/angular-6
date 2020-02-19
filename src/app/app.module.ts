@@ -14,7 +14,7 @@ import { MenuComponent } from './menu/menu.component';
    { path: '', component: HomeComponent},
    { path: 'home', component: HomeComponent},
    { path: 'login', component: LoginComponent},
-   { path: 'conversation', component: ConversationComponent},
+   { path: 'conversation/:uid', component: ConversationComponent},
    { path: 'profile', component: ProfileComponent},
  ]
 @NgModule({
