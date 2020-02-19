@@ -108,3 +108,18 @@ Los tipos básicos (built-in y definidos por el usuario) admitidos por TypeScrip
 
 Los tipos de datos avanzados de Type
 Script incluyen: Function, Object, Interface, Guard, Union, entre otros.
+
+
+### Qué son las interfaces de TypeScript y su implementación
+Los tipos de datos Interfaces de TypScript, son muy parecidos a una clase, en la que se definen propiedades internas que pueden ser de cualquiera de los otros tipos. Estas propiedades internas pueden definirse como obligatorias u opcionales usando el símbolo “”?"". Las interfaces definen en cierto modo estructuras personalizadas de datos en las que lo principal es que al ser implementadas usando ciertas IDEs (como Webstorm), muestran mensajes de control y validación para asegurar el uso adecuado de dicha interface, en tiempo real durante el desarrollo.
+
+La forma de declarar una interface se puede ver en el siguiente ejemplo:
+
+export interface User {
+  nick: string,
+  subnick?: string,
+  age?: number,
+  email: string,
+  friend: boolean,
+  uid: any
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import  { User } from '../interfaces/user'
 
 @Component({
   selector: 'app-home',
@@ -8,16 +9,17 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   constructor() {
-    console.log('oks')
-    let c: number = 1;
-    let b: number = 2;
-    let e: string = '1';
-    let f: string = '2';
-    let i = [c, b, e, f];
-    console.log(c + b, e + f)
-    let j: boolean[] = [true, false]
-    let n : any[] = [1,2,'tres', false, {}]
-    console.log(n)
+   let myUser : User = {
+    nick: 'Visidevi',
+    age: 27,
+    email: 'visidevi@gmail.com',
+    friend: false,
+    uid: '123'
+   }
+  let users: User[] = [
+    myUser,
+  ]
+   console.log(myUser)
   }
 
   ngOnInit(): void {
