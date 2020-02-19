@@ -1,1 +1,16 @@
-<p>home works!</p>
+
+<ng-container *ngFor="let item of friends; let i = index">
+    <p *ngIf="item.friend">
+        {{item.nick}}
+        {{ i }}
+        {{ item.status }} <br>
+    </p>
+</ng-container>
+no amigos_____
+<ng-container *ngFor="let item of friends; let i = index">
+    <p *ngIf="!item.friend">
+        {{item.nick}}
+        {{ i }}
+        {{ item.status }} <br>
+    </p>
+</ng-container>
