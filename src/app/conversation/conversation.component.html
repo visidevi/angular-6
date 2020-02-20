@@ -1,4 +1,7 @@
 <p>conversation works!</p>
 
 {{ friendId }}
-{{ friend.nick }}
+
+{{ friend |json }} <br>
+{{ price | number: '1.2-2' }} <br>
+{{date|date: 'medium'}}
