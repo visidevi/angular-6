@@ -139,3 +139,18 @@ Para tener acceso al detalle de los usuarios en diferentes componentes podemos i
 
 Duplicar la fuente de datos en los dos (o más) componentes (no recomendada)
 Tener una sola fuente de datos a la que pueden acceder varios componentes (recomendada)
+
+### Creando un servicio de usuarios e Inyectando el servicio en nuestros componentes
+Un servicio es una clase que puede ser inyectada en uno o varios componentes y que es muy útil para compartir datos o funciones entre éstos, evitando la duplicidad de código.
+
+Se crean a través del Angular CLI con el siguiente comando:
+
+ng generate service <directorio>/<nombre del servicio>
+Al ejecutar este comando se generan en nuestro proyecto los siguientes archivos:
+
+/<directorio>
+  <nombre del servicio>.service.spec.ts
+  <nombre del servicio>.service.ts
+Luego en el componente, inyectamos el Servicio de manera similar a cómo inyectamos el ActivatedRoute.
+
+Los services en Angular son para que en ellos puedas hacer peticiones a una API, puedas hacer cualquier tipo de petición ya sea GET, POST, PUT o DELETE.
