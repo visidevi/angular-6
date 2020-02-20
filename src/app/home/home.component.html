@@ -1,18 +1,13 @@
 
-<ng-container *ngFor="let item of friends; let i = index">
-    <p *ngIf="item.friend">
-         <a routerLink="/conversation/{{item.uid}}">
+<input type="text" name="" id="" placeholder="Buscar" [(ngModel)]="query">
+Hola
+<br>
+<ng-container *ngFor="let item of friends | search: query; let i = index">
+    <p>
+        <a routerLink="/conversation/{{item.uid}}">
             {{item.nick}} |
-        {{ i }}|
-        {{ item.status }}|
-         </a>
-    </p>
-</ng-container>
-no amigos_____
-<ng-container *ngFor="let item of friends; let i = index">
-    <p *ngIf="!item.friend">
-        {{item.nick}}
-        {{ i }}
-        {{ item.status }} <br>
+            {{ i }}|
+            {{ item.status }}|
+        </a>
     </p>
 </ng-container>

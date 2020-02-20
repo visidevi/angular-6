@@ -154,3 +154,16 @@ Al ejecutar este comando se generan en nuestro proyecto los siguientes archivos:
 Luego en el componente, inyectamos el Servicio de manera similar a cómo inyectamos el ActivatedRoute.
 
 Los services en Angular son para que en ellos puedas hacer peticiones a una API, puedas hacer cualquier tipo de petición ya sea GET, POST, PUT o DELETE.
+### Creando nuestro propio pipe para buscar entre nuestros contactos
+Para crear un pipe personalizado debemos crear un archivo de TypeScript e importar las clases Pipe y PipeTransform desde @angular/core.
+
+import {Pipe, PipeTransform} from '@angular/core';
+
+@Pipe ({
+  name: 'nombre-del-pipe' // --- este es el nombre con que se implementa en el html
+})
+export class MiCustomPipe implements PipeTransform {
+  public transform ( value, args: string ) {
+     return <valor transformado>
+  }
+}
