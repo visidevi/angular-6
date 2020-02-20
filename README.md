@@ -133,3 +133,9 @@ NgFor nos permite recorrer un arreglo de datos y por cada elemento generar o imp
 NgIF es una directiva estructural de Angular que evalúa un valor o una expresión buleana, en función de la cual se mostrará o no, un elemento HTML. El elemento se mostrará sólo cuando la condición sea verdadera (true).
 ### Navegación con parámetros
 Al navegar entre pantallas, hay ocasiones en las que es necesario pasar datos particulares. Usando routerLink podemos incluir parámetros de manera similar a como lo hacemos con subdominios o subdirectorios. Para recibir e interpretar estos parámetros correctamente es necesario definir las rutas específicas en appRoutes y consultarlos luego en el componente con el objeto ActivatedRoute.
+### Accediendo a nuestros usuarios desde Conversation.ts
+
+Para tener acceso al detalle de los usuarios en diferentes componentes podemos implementar una de dos soluciones:
+
+Duplicar la fuente de datos en los dos (o más) componentes (no recomendada)
+Tener una sola fuente de datos a la que pueden acceder varios componentes (recomendada)
