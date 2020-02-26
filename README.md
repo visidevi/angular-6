@@ -86,13 +86,13 @@ Para implementar ruteo, que es la capacidad de navegar entre componentes (vistas
 import { Routes } from '@angular/router';
 Luego se deben declarar todas las rutas que vamos a usar en una constante de tipo Routes:
 
-...
+```
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent }
 ];
-...
+```
 Se incluyen todas las rutas definidas como elementos de un arreglo de objetos json de JS.
 La propiedad path va a comparar el segmento coincidente en la url, mientras que component indica hacia cuál componente se va a navegar.
 
@@ -100,7 +100,7 @@ Para hacer funcionar las rutas en nuestra app, se debe importar el módulo Route
 
 Finalmente para implementar la navegación en nuestra app, es necesario indicar en el contenido de app.component.html una directiva <router-outlet></router-outlet> que se utilizará para inyectar eventualmente los componentes de toda la navegación que hemos definido. Todo lo que se coloque en el html, fuera de esta directiva, quedará fijado como contenido común en todas las vistas de nuestra navegación.
 
-Es importante tener en cuenta que al usar enlaces o anclas ( <a> ... </a> ) de html, tendremos que sustituir el atributo href por routerLink, que es parte de RouterModule, para evitar la recarga completa de la página y la latencia, ya que esto iría en contra del concepto fundamental de lo que es una SPA (single page app).
+Es importante tener en cuenta que al usar enlaces o anclas ( <a> ``` </a> ) de html, tendremos que sustituir el atributo href por routerLink, que es parte de RouterModule, para evitar la recarga completa de la página y la latencia, ya que esto iría en contra del concepto fundamental de lo que es una SPA (single page app).
 ### ¿Cómo usar tipos de datos con TypeScript?
 TypeScript debe su nombre a los tipos de datos (types en inglés). JavaScript no es un lenguaje de programación tipado, por lo que es requerida en su sintaxis la definición de un tipo de dato al momento de instanciar las clases o variables en general. El uso de tipos explícitos en la programación permite a fin de cuentas un mejor aprovechamiento del recurso de memoria, entre muchos otros beneficios.
 
@@ -167,3 +167,17 @@ export class MiCustomPipe implements PipeTransform {
      return <valor transformado>
   }
 }
+### Instalando librerías usando npm (bootstrap y font-awesome) y Referenciando CSS en el angular.json
+Se recomienda instalar los paquetes con versiones exactas para evitar incompatibilidades con versiones futuras de las librerías.
+
+npm install bootstrap --save-exact
+npm install @fortawesome/fontawesome-free --save-exact
+Luego de instalados los paquetes con npm, la implementación se hace importando las librerías en la sección styles del archivo angular.json
+
+```
+  ""styles"": [
+    ""node_modules/bootstrap/dist/css/bootstrap.css"",
+    ""node_modules/@fortawesome/fontawesome-free/css/all.css"",
+    ""src/styles.css""
+  ]
+```
