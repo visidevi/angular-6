@@ -11,3 +11,15 @@ Hola
         </a>
     </p>
 </ng-container>
+
+<input type="text"placeholder="Buscar amigo" [(ngModel)]="query">
+<h3>Amigos</h3>
+<ng-container *ngFor="let user of friends | search: query;let i = index">
+    <div [ngSwitch]="user.status">
+        <strong>{{i + 1}}. </strong><a routerLink="/conversation/{{user.uid}}">{{user.nick}} - {{user.email}}</a>
+        <img *ngSwitchCase="'online'"src="assets/img/logo_live_online.png"class="img-fluid status">
+        <img *ngSwitchCase="'offline'"src="assets/img/logo_live_offline.png"class="img-fluid status">
+        <img *ngSwitchCase="'busy'"src="assets/img/logo_live_busy.png"class="img-fluid status">
+        <img *ngSwitchCase="'away'"src="assets/img/logo_live_away.png"class="img-fluid status">
+    </div>
+</ng-container>
