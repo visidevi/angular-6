@@ -183,3 +183,5 @@ Luego de instalados los paquetes con npm, la implementación se hace importando 
 ```
 ### Terminando de implementar los estilos de nuestra pantalla de login
 Cuando queremos que las clases que estamos definiendo estén disponibles en todo el proyecto y no sólo en la pantalla del componente actual, tendremos que definirlas en el archivo styles.css en la raíz del proyecto y no sólo en el css del componente.
+
+ ng serve --open
