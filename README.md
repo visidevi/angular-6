@@ -185,3 +185,9 @@ Luego de instalados los paquetes con npm, la implementación se hace importando 
 Cuando queremos que las clases que estamos definiendo estén disponibles en todo el proyecto y no sólo en la pantalla del componente actual, tendremos que definirlas en el archivo styles.css en la raíz del proyecto y no sólo en el css del componente.
 
  ng serve --open
+
+### Implementando estilos en la pantalla de home
+En el directorio assets/ del proyecto se encuentran los archivos de imágenes que se usan para los backgrounds en los diferentes contenedores de la UI, así como otras imágenes del proyecto.
+
+### Implementando estilos en home, lista de contactos
+Las clases row y col de Bootstrap permiten distribuir los anchos de los div's de una manera automatizada. En ciertos casos se suelen usar etiquetas de html en lugar de estilos, como es el caso de las etiquetas <b> o <i>.

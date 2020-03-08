@@ -1,3 +1,26 @@
 .status{
     width: 20px;
 }
+.homeContainer {
+    background-image: url(/assets/img/msnbg.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.whiteBorderBox{
+    border: 2px solid rgba(255, 255, 255, .75);
+    padding: 8px;
+}
+.homeHeadContainer {
+    background-color:  rgba(255, 255, 255, .50);
+}
+.avatarFrameOnline{
+    max-width: 150px;
+    max-height: 150px;
+}
+.whiteContainerPadded{
+    padding: 15px;
+    background-color: #feffff;
+}
+img.icon {
+    width: 30px;
+}

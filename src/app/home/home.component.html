@@ -1,25 +1,49 @@
-
-<input type="text" name="" id="" placeholder="Buscar" [(ngModel)]="query">
-Hola
-<br>
-<ng-container *ngFor="let item of friends | search: query; let i = index">
-    <p>
-        <a routerLink="/conversation/{{item.uid}}">
-            {{item.nick}} |
-            {{ i }}|
-            {{ item.status }}|
-        </a>
-    </p>
-</ng-container>
-
-<input type="text"placeholder="Buscar amigo" [(ngModel)]="query">
-<h3>Amigos</h3>
-<ng-container *ngFor="let user of friends | search: query;let i = index">
-    <div [ngSwitch]="user.status">
-        <strong>{{i + 1}}. </strong><a routerLink="/conversation/{{user.uid}}">{{user.nick}} - {{user.email}}</a>
-        <img *ngSwitchCase="'online'"src="assets/img/logo_live_online.png"class="img-fluid status">
-        <img *ngSwitchCase="'offline'"src="assets/img/logo_live_offline.png"class="img-fluid status">
-        <img *ngSwitchCase="'busy'"src="assets/img/logo_live_busy.png"class="img-fluid status">
-        <img *ngSwitchCase="'away'"src="assets/img/logo_live_away.png"class="img-fluid status">
+<div class="homeContainer">
+    <div class="whiteBorderGlassBox">
+        <div class="homeHeaderContainer">
+            <div class="d-flex">
+                <div class="flex-grow-0 border">
+                    <div class="avatarFrameOnline">
+                        <img src="assets/img/generic_avatar.png" alt="avatar"
+                            class="avatarImage img-fluid homeAvatarPicture">
+                    </div>
+                </div>
+                <div class="p-2">
+                    <strong>Eduardo</strong>
+                    <div class="">Online</div>
+                    <div>
+                        <"Escribe un mensaje Personal">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</ng-container>
+    <div class="whiteContainerPadded marto15">
+        <div class="d-flex w-100">
+            <div class="w-75">
+                <input class="form-control" type="text" name="" id="" placeholder="Buscar" [(ngModel)]="query">
+            </div>
+            <div class="px-2">
+                <img class="icon" src="assets/img/logo_live_add.png" alt="">
+            </div>
+        </div>
+
+        <hr class="border">
+        <div class="d-flex">
+            <strong> ({{friends.length }} / {{friends.length}} )</strong>
+        </div>
+        <ng-container *ngFor="let user of friends | search: query; let i = index">
+            <p  [ngSwitch]="user.status" class="my-3">
+                <a routerLink="/conversation/{{user.uid}}">
+                    <img *ngSwitchCase="'online'" src="assets/img/logo_live_online.png" class="img-fluid status mr-2">
+                    <img *ngSwitchCase="'offline'" src="assets/img/logo_live_offline.png" class="img-fluid status mr-2">
+                    <img *ngSwitchCase="'busy'" src="assets/img/logo_live_busy.png" class="img-fluid status mr-2">
+                    <img *ngSwitchCase="'away'" src="assets/img/logo_live_away.png" class="img-fluid status mr-2">
+                    <strong>{{user.nick}}</strong> - {{user.subnick || 'noSubNick' }} |
+                    {{ user.status }}|
+                    <small>{{user.email}}</small>
+                </a>
+            </p>
+        </ng-container>
+    </div>
+</div>
