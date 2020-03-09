@@ -194,3 +194,8 @@ Las clases row y col de Bootstrap permiten distribuir los anchos de los div's de
 
 ### Implementando estilos en profile
 Cuando usamos inputs de tipo file, normalmente no podemos controlar de manera directa la apariencia en el navegador; incluso, la apariencia de este elemento es muy diferente para los diferentes navegadores. Para evitar esta inconsistencia visual podemos colocar el input dentro de una etiqueta <label> y ocultarlo con display: none, y aplicar al label una clase para que se ajuste mejor a la apariencia de los botones de nuestra UI.
+
+### ¿Qué es Firebase? Creando nuestro proyecto
+Firebase es un servicio de backend ofrecido por Google de manera gratuita. Provee entre sus utilidades, una base de datos remota más parecida a Mongo que SQL ya que es del tipo no-relacional.
+
+Para implementar este servicio es necesario acceder a la consola de Firebase con una cuenta Google, y seguir las instrucciones de implementación en la sección Base de Datos en Tiempo Real.
