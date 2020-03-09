@@ -191,3 +191,6 @@ En el directorio assets/ del proyecto se encuentran los archivos de imágenes qu
 
 ### Implementando estilos en home, lista de contactos
 Las clases row y col de Bootstrap permiten distribuir los anchos de los div's de una manera automatizada. En ciertos casos se suelen usar etiquetas de html en lugar de estilos, como es el caso de las etiquetas <b> o <i>.
+
+### Implementando estilos en profile
+Cuando usamos inputs de tipo file, normalmente no podemos controlar de manera directa la apariencia en el navegador; incluso, la apariencia de este elemento es muy diferente para los diferentes navegadores. Para evitar esta inconsistencia visual podemos colocar el input dentro de una etiqueta <label> y ocultarlo con display: none, y aplicar al label una clase para que se ajuste mejor a la apariencia de los botones de nuestra UI.
