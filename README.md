@@ -199,3 +199,29 @@ Cuando usamos inputs de tipo file, normalmente no podemos controlar de manera di
 Firebase es un servicio de backend ofrecido por Google de manera gratuita. Provee entre sus utilidades, una base de datos remota más parecida a Mongo que SQL ya que es del tipo no-relacional.
 
 Para implementar este servicio es necesario acceder a la consola de Firebase con una cuenta Google, y seguir las instrucciones de implementación en la sección Base de Datos en Tiempo Real.
+
+
+### Diferencia entre conexión por sockets y HTTP
+Conexión HTTP:
+
+Se establece la comunicación al servidor
+Se solicitan los recursos
+Se reciben los recursos
+Se confirman recibidos los recursos
+Se cierra la conexión
+Esto se repite por cada requerimiento de recursos que sean necesarios.
+
+Conexión con sockets:
+
+Se establece la comunicación al servidor
+Se solicitan los recursos
+Se reciben los recursos
+Se confirman recibidos los recursos
+La comunicación queda abierta y escuchando posibles cambios en los recursos
+Al suceder algún cambio en el recurso, el servidor notifica al navegador sin volver abrir nuevas conexiones.
+
+
+### Instalación y setup de la librería AngularFire a través de npm
+Para conectar nuestro proyecto a los servicios de Firebase, usamos AngularFire, disponible en los repositorios de paquetes de npm. Al crear un proyecto en Firebase se nos muestran varias opciones de configuración. La opción de configuración web es la que vamos a utilizar, al obtener los datos y credenciales de autenticación las copiamos en el archivo environment.ts y en environment.prod.ts para que estén disponibles tanto en el ambiente de desarrollo como en producción.
+
+Una vez creadas las variables de configuración será necesario importar los módulos AngularFireModule y environment en app.modules.ts. Finalmente incluímos las clases de Firebase que usaremos en nuestro proyecto en la sección imports: AngularFireAuthModule, AngularFireStorageModule y AngularFireDatabaseModule.
