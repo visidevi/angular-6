@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms'
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-
+import { AngularFireAuthModule } from "@angular/fire/auth";
 
  const  appRoutes: Routes  = [
    { path: '', component: HomeComponent},
@@ -39,9 +39,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     // los módulos extienden la funcionalidad de nuestra application
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireDataBaseModule,
+    AngularFireModule.initializeApp(environment.firebase),
+  
+    // AngularFireDataBaseModule,
     AngularFirestoreModule,
   ],
   providers: [],

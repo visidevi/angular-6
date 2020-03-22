@@ -225,3 +225,7 @@ Al suceder algún cambio en el recurso, el servidor notifica al navegador sin vo
 Para conectar nuestro proyecto a los servicios de Firebase, usamos AngularFire, disponible en los repositorios de paquetes de npm. Al crear un proyecto en Firebase se nos muestran varias opciones de configuración. La opción de configuración web es la que vamos a utilizar, al obtener los datos y credenciales de autenticación las copiamos en el archivo environment.ts y en environment.prod.ts para que estén disponibles tanto en el ambiente de desarrollo como en producción.
 
 Una vez creadas las variables de configuración será necesario importar los módulos AngularFireModule y environment en app.modules.ts. Finalmente incluímos las clases de Firebase que usaremos en nuestro proyecto en la sección imports: AngularFireAuthModule, AngularFireStorageModule y AngularFireDatabaseModule.
+
+```
+https://www.positronx.io/firebase-authentication-in-angular-8-with-angularfire2/
+```
