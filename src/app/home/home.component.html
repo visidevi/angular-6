@@ -30,7 +30,7 @@
 
         <hr class="border">
         <div class="d-flex">
-            <strong> ({{friends.length }} / {{friends.length}} )</strong>
+            <strong *ngIf="friends"> ({{friends.length }} / {{friends.length}} )</strong>
         </div>
         <ng-container *ngFor="let user of friends | search: query; let i = index">
             <p  [ngSwitch]="user.status" class="my-3">

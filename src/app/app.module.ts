@@ -15,6 +15,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireDatabaseModule } from '@angular/fire/database'
 
  const  appRoutes: Routes  = [
    { path: '', component: HomeComponent},
@@ -41,8 +42,7 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
     FormsModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
-  
-    // AngularFireDataBaseModule,
+    AngularFireDatabaseModule,
     AngularFirestoreModule,
   ],
   providers: [],
