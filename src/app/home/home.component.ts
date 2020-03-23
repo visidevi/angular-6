@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../interfaces/user'
 import { UserService } from '../services/user.service';
+import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +12,9 @@ import { UserService } from '../services/user.service';
 export class HomeComponent implements OnInit {
   friends: User[]
   query: string = '';
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+    private authenticationService: AuthenticationService,
+    private router: Router ) {
     this.userService.getUsers()
       .valueChanges()
       .subscribe((data: User[]) => {
@@ -19,6 +23,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+  logout() {
+    this.authenticationService.logOut().then((data) => {
+      this.router.navigate(['login'])
+      console.log(data)
+    }). catch((e) => {console.log(e)})
   }
 
 }
