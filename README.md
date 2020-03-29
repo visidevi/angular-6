@@ -250,3 +250,19 @@ Para incluir la funcionalidad de agregar foto a nuestro perfil, usaremos el serv
 El servicio FirebaseStorage funciona como un repositorio de recursos estáticos (organizado en carpetas) y se implementa en Angular a través del módulo AngularFireStorageModule, que debemos incluir en app.modules.ts
 
 Finalmente, subiremos la imagen recortada a FirebaseStorage en formato base64, que será convertida por el storage a formato binario. Guardaremos luego en la base de datos, la referencia a la url de esa imagen que obtenemos mediante el método getDownloadURL().
+
+### ¿Cómo resolver el problema de comunicación en tiempo real?
+Generalmente, en sistemas tradicionales, un cliente envía la información al servidor, donde va a quedar almacenada hasta que otro cliente haga una petición y descargue los datos actualizados a su entorno local. Esto debe hacerlo el cliente dos en intervalos frecuentes que pueden ir desde algunos minutos hasta un segundo o menos, lo que pudiera significar una sobre carga del servidor. Esto va a depender de la cantidad de clientes que realicen peticiones en simultáneo.
+
+Firebase por su parte, usa una estrategia de sockets para manejar las actualizaciones que suceden en su servicio de base de datos en tiempo real. Esto significa que una vez realizada la primera conexión entre la app y el servidor, queda abierto un canal de comunicación permanente entre el servidor y el cliente, y al haber alguna actualización en la base de datos, ésta es notificada al navegador en cuestión de milisegundos, sin necesidad de que éste haya hecho una petición explícitamente, ni sometiendo al servidor a atender peticiones recurrentes en intervalos específicos.
+
+En nuestra app sólo deberemos tener un método que esté subscrito a los cambios notificados por el servicio de base de datos de firebase a través de un Observable, para actualizar la información de nuestro componente.
+
+
+### Enviando un mensaje (con reproducción de sonido)
+Para el manejo de la conversación en nuestra app, crearemos un servicio llamado conversation, usando el Angular CLI. Usaremos el servicio de base de datos en tiempo real de Firebase a través del objeto AngularFireDatabase inyectado a nuestro servicio en el constructor.
+
+Cada mensaje estará identificado con un timestamp del momento en que se generó y una clave única formada por el user.uid de los dos usuarios que intervienen en la conversación, ordenados con sort() y concatenados con join().
+
+### Crear Servicios
+ng generate service services/conversation
