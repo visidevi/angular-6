@@ -7,14 +7,14 @@ import { AngularFireDatabase } from '@angular/fire/database';
 export class ConversationService {
 
   constructor(private angularFireDatabase: AngularFireDatabase,
-    ) {
+  ) {
 
-     }
-     createConversation(conversation) {
-return this.angularFireDatabase.object(`conversation/${conversation.uid}/${conversation.timestamp}`).set(conversation)
-     }
-     getConversation(conversation) {
-      return this.angularFireDatabase.object(`conversation/${conversation.uid}/${conversation.timestamp}`).set(conversation)
-           }
+  }
+  createConversation(conversation) {
+    return this.angularFireDatabase.object(`conversation/${conversation.uid}/${conversation.timestamp}`).set(conversation)
+  }
+  getConversation(uid) {
+    return this.angularFireDatabase.list(`conversations/${uid}`)
+  }
 
 }

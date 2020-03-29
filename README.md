@@ -266,3 +266,11 @@ Cada mensaje estará identificado con un timestamp del momento en que se generó
 
 ### Crear Servicios
 ng generate service services/conversation
+
+### createConversation(conversation) {
+return this.angularFireDatabase.object(`conversation/${conversation.uid}/${conversation.timestamp}`).set(conversation)
+}
+Enviando un mensaje (con reproducción de sonido)
+Para el manejo de la conversación en nuestra app, crearemos un servicio llamado conversation, usando el Angular CLI. Usaremos el servicio de base de datos en tiempo real de Firebase a través del objeto AngularFireDatabase inyectado a nuestro servicio en el constructor.
+
+Cada mensaje estará identificado con un timestamp del momento en que se generó y una clave única formada por el user.uid de los dos usuarios que intervienen en la conversación, ordenados con sort() y concatenados con join().

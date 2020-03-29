@@ -3,7 +3,7 @@
         <div *ngIf="user" class="d-flex">
             <div class="w-25 align-content-start">
                 <div class="avatarFrameOnline">
-                    <img class="avatarImage img-fluid" [src]="croppedImage || user.avatar || 'assets/images/generic_avatar.png'" alt="">
+                    <img class="avatarImage img-fluid" [src]="croppedImage || user.avatar || 'assets/img/generic_avatar.png'" alt="">
                 </div>
                 <hr>
                 <div class="">
@@ -15,12 +15,10 @@
                 </div>
             </div>
             <div class="w-75 pl-4">
-                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
-                    [aspectRatio]="1/1" format="png" (imageCropped)="imageCropped($event)"
-                    (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1/1" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
                 </image-cropper>
 
-                <img  />
+                <img />
                 <div class="py-2">
                     <label fixed>Nick</label>
                     <input [(ngModel)]="user.nick" type="text" class="form-control" />
