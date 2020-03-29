@@ -15,7 +15,7 @@ export class ConversationComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
      private  userService: UserService) {
     this.friendId = this.activatedRoute.snapshot.params.uid;
-    this.userService.getUserById(this.friendId).valueChanges().subscribe((data) => {
+    this.userService.getUserById(this.friendId).valueChanges().subscribe((data : User) => {
       this.friend = data
       console.log(data)
     }, (e) => {console.log(e)} )

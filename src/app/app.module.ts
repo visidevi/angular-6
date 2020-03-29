@@ -13,10 +13,13 @@ import { SearchPipe } from './pipes/search';
 import { FormsModule } from '@angular/forms'
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule, AngularFirestore } from  '@angular/fire/firestore';
 import { AngularFireAuthModule } from "@angular/fire/auth";
-import { AngularFireDatabaseModule } from '@angular/fire/database'
-import { AuthenticationGuard } from './services/authentication.guard'
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AuthenticationGuard } from './services/authentication.guard';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { AngularFireStorage } from '@angular/fire/storage';
+
  const  appRoutes: Routes  = [
    { path: '', component: HomeComponent},
    { path: 'home', component: HomeComponent, canActivate: [ AuthenticationGuard ]},
@@ -24,6 +27,7 @@ import { AuthenticationGuard } from './services/authentication.guard'
    { path: 'conversation/:uid', component: ConversationComponent},
    { path: 'profile', component: ProfileComponent},
  ]
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,9 +47,10 @@ import { AuthenticationGuard } from './services/authentication.guard'
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
+    ImageCropperModule,
   ],
-  providers: [],
+  providers: [AngularFireStorage,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

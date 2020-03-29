@@ -229,3 +229,24 @@ Una vez creadas las variables de configuración será necesario importar los mó
 ```
 https://www.positronx.io/firebase-authentication-in-angular-8-with-angularfire2/
 ```
+
+### Guards para verificar Firebase auth
+Los guards son scripts que implementan una estrategia de seguridad para accesos no autorizados a las deferentes rutas de nuestra aplicación. Se crean de manera similar a los servicios y componentes, con el siguiente comando de AngularCLI:
+
+ng generate guard <directorio>/<nombre-del-guard>
+Resultando en la creación de los archivos: <nombre-del-guard>.specs.guard.ts y <nombre-del-guard>.guard.ts
+
+El guard se basa en un atributo llamado canActivate que, dependiendo de una condición o expresión buleana, retornará verdadero o falso al constructor del componente en el que se haya inyectado para indicarle cuando deberá mostrar o no el contenido de dicho componente.
+
+
+### Perfil de usuario
+Para mostrar la información del usuario en la pantalla de Perfil, necesitamos obtener su uid desde el servicio autenthicationService que creamos antes y usar este uid para extraer los detalles desde la base de datos a través del método getUserById en el servicio de usuario.
+
+Una vez obtenidos los datos adicionales del usuario, los enlazamos a los elementos html del formulario usando NgModel.
+
+### Guardando las imágenes de perfil en nuestra base de datos de firebase
+Para incluir la funcionalidad de agregar foto a nuestro perfil, usaremos el servicio Firebase Storage de Firebase, con AngularFireStorage.
+
+El servicio FirebaseStorage funciona como un repositorio de recursos estáticos (organizado en carpetas) y se implementa en Angular a través del módulo AngularFireStorageModule, que debemos incluir en app.modules.ts
+
+Finalmente, subiremos la imagen recortada a FirebaseStorage en formato base64, que será convertida por el storage a formato binario. Guardaremos luego en la base de datos, la referencia a la url de esa imagen que obtenemos mediante el método getDownloadURL().

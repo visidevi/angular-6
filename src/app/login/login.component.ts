@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  operation: string =  'login'
+  operation: string =  'register'
   email: string = null
   password: string = null
   nick: string = null
