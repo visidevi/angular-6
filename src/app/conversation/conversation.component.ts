@@ -16,6 +16,7 @@ export class ConversationComponent implements OnInit {
   user: User;
   conversation_id: string;
   textMessage: string;
+  conversation: any = []
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -27,14 +28,11 @@ export class ConversationComponent implements OnInit {
     this.authenticationService.getStatus().subscribe((session) => {
       this.userService.getUserById(session.uid).valueChanges().subscribe((data: User) => {
         this.user = data
-
         this.userService.getUserById(this.friendId).valueChanges().subscribe((data: User) => {
           this.friend = data
-          console.log(this.friend.uid, this.user.uid)
           const ids = [this.user.uid, this.friend.uid].sort();
-          console.log(ids)
           this.conversation_id = ids.join('|');
-          console.log(data)
+          this.getConversation();
         }, (e) => { console.log(e) })
 
       }, (e) => { console.log(e) })
@@ -53,7 +51,7 @@ export class ConversationComponent implements OnInit {
   sendMessage() {
     const message = {
       uid: this.conversation_id,
-      timestap: Date.now(),
+      timestamp: Date.now(),
       text: this.textMessage,
       sender: this.user.uid,
       reciver: this.friend.uid
@@ -62,4 +60,26 @@ export class ConversationComponent implements OnInit {
       this.textMessage = ''
     })
   }
+  getConversation() {
+    this.conversationService.getConversation(this.conversation_id).valueChanges().subscribe((conversation) => {
+      this.conversation = conversation
+      this.conversation.forEach((message) => {
+        if (!message.seen) {
+          message.seen = true,
+            this.conversationService.editConversation(message);
+          const audio = new Audio('assets/sound/new_message.m4a')
+          audio.play()
+        }
+      })
+    }), (e) => {
+      console.log(e)
+    }
+  }
+  getUserByNickid(id) {
+    if (id === this.friend.uid) {
+      return this.friend.nick;
+    } else {
+      return this.user.nick
+     }
+   }
 }
