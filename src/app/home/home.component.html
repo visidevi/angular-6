@@ -1,21 +1,37 @@
 <div class="homeContainer">
-    <div class="whiteBorderGlassBox">
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Agregar amigo</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+        </div>
+        <div class="modal-body">
+            <div class="">
+                <strong>Ingresa email de tu amigo</strong>
+                <input [(ngModel)]="friendEmail" (keyup.enter)="sendRequest()" type="email" name="Email" id="" placeholder="Ingresa un email" class="form-control">
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="sendRequest()">Guardar</button>
+        </div>
+    </ng-template>
+    <div class="whiteBorderGlassBox" *ngIf="user">
         <div class="homeHeaderContainer">
             <div class="d-flex">
                 <div class="flex-grow-0 border">
                     <div class="avatarFrameOnline">
-                        <img src="assets/img/generic_avatar.png" alt="avatar"
-                            class="avatarImage img-fluid homeAvatarPicture">
+                        <img class="avatarImage img-fluid" [src]="user.avatar || 'assets/img/generic_avatar.png'" alt="">
                     </div>
                 </div>
                 <div class="p-2">
-                    <!-- <strong>{{friends.nick}}</strong> -->
-                    <div class="">Online</div>
+                    <div class="font-weight-bold">{{ user.nick }}</div>
                     <div>
-                        <"Escribe un mensaje Personal">
+                        < "Escribe un mensaje Personal">
                     </div>
                 </div>
-               <button (click)="logout()"  class="btn btn-primary ">Cerrar Session</button>
+                <button (click)="logout()" class="btn btn-primary ">Cerrar Session</button>
             </div>
         </div>
     </div>
@@ -25,7 +41,7 @@
                 <input class="form-control" type="text" name="" id="" placeholder="Buscar" [(ngModel)]="query">
             </div>
             <div class="px-2">
-                <img class="icon" src="assets/img/logo_live_add.png" alt="">
+                <img class="icon" src="assets/img/logo_live_add.png" alt="" (click)="open(content)">
             </div>
         </div>
 
@@ -33,16 +49,15 @@
         <div class="d-flex">
             <strong *ngIf="friends"> ({{friends.length }} / {{friends.length}} )</strong>
         </div>
-        <ng-container *ngFor="let user of friends | search: query; let i = index">
-            <p  [ngSwitch]="user.status" class="my-3">
-                <a routerLink="/conversation/{{user.uid}}">
+        <ng-container *ngFor="let fr of friends | search: query; let i = index">
+            <p [ngSwitch]="fr.status" class="my-3">
+                <a routerLink="/conversation/{{fr.uid}}">
                     <img *ngSwitchCase="'online'" src="assets/img/logo_live_online.png" class="img-fluid status mr-2">
                     <img *ngSwitchCase="'offline'" src="assets/img/logo_live_offline.png" class="img-fluid status mr-2">
                     <img *ngSwitchCase="'busy'" src="assets/img/logo_live_busy.png" class="img-fluid status mr-2">
                     <img *ngSwitchCase="'away'" src="assets/img/logo_live_away.png" class="img-fluid status mr-2">
-                    <strong>{{user.nick}}</strong> - {{user.subnick || 'noSubNick' }} |
-                    {{ user.status }}|
-                    <small>{{user.email}}</small>
+                    <strong>{{fr.nick}}</strong> - {{fr.subnick || 'noSubNick' }} | {{ fr.status }}|
+                    <small>{{fr.email}}</small>
                 </a>
             </p>
         </ng-container>

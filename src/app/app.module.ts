@@ -19,6 +19,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AuthenticationGuard } from './services/authentication.guard';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
  const  appRoutes: Routes  = [
    { path: '', component: HomeComponent},
@@ -27,7 +28,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
    { path: 'conversation/:uid', component: ConversationComponent},
    { path: 'profile', component: ProfileComponent},
  ]
- 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
     AngularFireDatabaseModule,
     AngularFirestoreModule.enablePersistence(),
     ImageCropperModule,
+    NgbModule,
   ],
   providers: [AngularFireStorage,],
   bootstrap: [AppComponent]

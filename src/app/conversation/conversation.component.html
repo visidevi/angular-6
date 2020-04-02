@@ -1,7 +1,7 @@
-<div class="conversationContainer">
-    <div class="contPrinc pato45" *ngIf="user && friend">
-        <div class="d-flex">
-            <div class="w-25">
+<div class="conversationContainer" [ngClass]="{'shaker': shake }">
+    <div class="container-fluid" *ngIf="user && friend">
+        <div class="row no-gutters">
+            <div class="col-1">
                 <div class="avatarFrameOnLine ">
                     <img [src]="friend.avatar || 'assets/img/generic_avatar.png'" class=" homeAvatarPicture img-fluid">
                 </div>
@@ -9,42 +9,47 @@
                     <img [src]="user.avatar || 'assets/img/generic_avatar.png'" class=" homeAvatarPicture img-fluid">
                 </div>
             </div>
-            <div class="">
-                <div class="container">
-                    <div class="chatContainer marto15" *ngIf="conversation">
+            <div class="col">
+                <div class="d-flex flex-column flex-column justify-content-end ">
+                    <div class="" *ngIf="conversation">
                         <ng-container>
                             <div class="message-group" *ngFor="let msg of conversation; let i = index">
                                 <strong>{{getUserByNickid(msg.sender)}}</strong> dice:
-                                <p>{{msg.text}}</p>
+                                <p [class]="{'zumbido': msg.type === 'zumbido'}">{{msg.text}}</p>
+                                <img *ngIf="msg.type === 'image'" class="conversation-img" [src]="msg.url" alt="image">
+
                             </div>
                         </ng-container>
-
-                        <div class="bg-light py-2 rounded my-3 float-left w-75">
-                            <strong class="border-bottom p-2">{{friend.nick}}</strong>
-                            <p class="p-2">Hola, ¿como estas?</p>
-                        </div>
-
-                        <div class="mb-2 bg-info text-white rounded float-right">
-                            <strong class="border-bottom p-2">Yo:</strong>
-                            <p class="p-2"> <br> ¿y tu?</p>
-                        </div>
-
                     </div>
-                    <div class="bottomChat">
-                        <input [(ngModel)]="textMessage" (keyup.enter)="sendMessage()" type="textarea" class="form-control areaChat" placeholder="Escribe un mensaje" name="">
-                        <div class="marto15">
-                            <img src="assets/img/zumbido.png" class="iconImage img-fluid">
-                            <img src="assets/img/zumbido.png" class="iconImage img-fluid">
-                            <img src="assets/img/zumbido.png" class="iconImage img-fluid">
-
-                            <label class="customFileUpload">
-                                <input type="file">
-                                <i class="far fa-images"></i>
-                                Seleccionar Imagen
-                            </label>
-                            <!-- <button type="button" class="btn btn-info" (click)="sendMessage()">Enviar</button> -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="h-25">
+                                <img *ngIf="croppedImage" class="avatarImage img-fluid" [src]="croppedImage" alt="">
+                            </div>
                         </div>
+                        <div class="col-12" *ngIf="croppedImage">
+                            <button class="btn-info btn btn-block" (click)="sendPicture()">Enviar</button>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column align-items-center mt-auto w-100">
+                        <input [(ngModel)]="textMessage " (keyup.enter)="sendMessage() " type="textarea " class="form-control areaChat " placeholder="Escribe un mensaje " name=" ">
+                        <div class="d-flex align-items-center  justify-content-start float-left border w-100">
+                            <img src="assets/img/zumbido.png " class="iconImage img-fluid ">
+                            <img src="assets/img/zumbido.png " class="iconImage img-fluid ">
+                            <img src="assets/img/zumbido.png " class="iconImage img-fluid " (click)="sendZumbido() ">
+                            <div class="pt-2">
 
+                                <label for="" class="custom-file-upload upload-btn-wrapper">
+                                <input type="file" (change)="fileChangeEvent($event)">
+                                <i class="far fa-images "></i>
+                                Seleccionar Imagen
+                              </label>
+                                <label for="" class="custom-file-upload upload-btn-wrapper">
+                                <input type="file"  (change)="changeListener($event)">
+                                <i class="far fa-images "></i>
+                              </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
