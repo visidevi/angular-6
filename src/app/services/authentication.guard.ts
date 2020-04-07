@@ -18,6 +18,7 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild, CanDe
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.authenticationService.getStatus().pipe(
       map(status => {
+        console.log(status)
         if (!status) {
           this.router.navigate(['login'])
           return false

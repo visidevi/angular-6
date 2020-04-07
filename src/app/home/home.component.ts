@@ -24,7 +24,11 @@ export class HomeComponent implements OnInit {
     private requestService: RequestService) {
     this.authenticationService.getStatus().subscribe((status) => {
       this.userService.getUserById(status.uid).valueChanges().subscribe((data: User) => {
-        this.user = data,
+        this.user = data;
+        if (this.user.friends) {
+          this.user.friends = Object.values(this.user.friends)
+          console.log(this.user.friends)
+        }
           console.log(this.user)
       }, (e) => { console.log(e) })
     }, (error) => {
@@ -57,6 +61,7 @@ export class HomeComponent implements OnInit {
       timestamp: Date.now(),
       receiver_email: this.friendEmail,
       sender: this.user.uid,
+      sender_nick: this.user.nick,
       status: 'pending',
     }
     this.requestService.createRequest(request).then((data) => {

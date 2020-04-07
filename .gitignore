@@ -9,6 +9,7 @@
 
 # dependencies
 /node_modules
+Messenger-linux-x64
 
 # profiling files
 chrome-profiler-events*.json

@@ -13,13 +13,18 @@ import { SearchPipe } from './pipes/search';
 import { FormsModule } from '@angular/forms'
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
-import { AngularFirestoreModule, AngularFirestore } from  '@angular/fire/firestore';
+import { AngularFirestoreModule } from  '@angular/fire/firestore';
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AuthenticationGuard } from './services/authentication.guard';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { RequestComponent } from './modals/request/request.component';
+import { CommonModule } from '@angular/common';
+import '@angular/compiler';
+import { ContactComponent } from './contact/contact.component'
 
  const  appRoutes: Routes  = [
    { path: '', component: HomeComponent},
@@ -38,21 +43,29 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ProfileComponent,
     MenuComponent,
     SearchPipe,
+    RequestComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     // los módulos extienden la funcionalidad de nuestra application
     RouterModule.forRoot(appRoutes),
-    FormsModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFirestoreModule.enablePersistence(),
     ImageCropperModule,
     NgbModule,
+    // BootstrapModalModule.forRoot({ container: document.body }),
+    FormsModule,
+    CommonModule,
   ],
   providers: [AngularFireStorage,],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [RequestComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+  
+}

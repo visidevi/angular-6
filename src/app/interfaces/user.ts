@@ -3,7 +3,8 @@ export interface User {
     subnick?: string;
     age?: number;
     email: string;
-    friend?: boolean;
+  friend?: boolean;
+  friends?: any[];
     uid?: any;
     status? : string;
     avatar? : string;

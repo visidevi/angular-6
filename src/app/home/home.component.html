@@ -47,19 +47,10 @@
 
         <hr class="border">
         <div class="d-flex">
-            <strong *ngIf="friends"> ({{friends.length }} / {{friends.length}} )</strong>
+            <strong *ngIf="user && user.friends ">Amigos: ({{user.friends.length }} / {{user.friends.length}} )</strong>
         </div>
-        <ng-container *ngFor="let fr of friends | search: query; let i = index">
-            <p [ngSwitch]="fr.status" class="my-3">
-                <a routerLink="/conversation/{{fr.uid}}">
-                    <img *ngSwitchCase="'online'" src="assets/img/logo_live_online.png" class="img-fluid status mr-2">
-                    <img *ngSwitchCase="'offline'" src="assets/img/logo_live_offline.png" class="img-fluid status mr-2">
-                    <img *ngSwitchCase="'busy'" src="assets/img/logo_live_busy.png" class="img-fluid status mr-2">
-                    <img *ngSwitchCase="'away'" src="assets/img/logo_live_away.png" class="img-fluid status mr-2">
-                    <strong>{{fr.nick}}</strong> - {{fr.subnick || 'noSubNick' }} | {{ fr.status }}|
-                    <small>{{fr.email}}</small>
-                </a>
-            </p>
+        <ng-container *ngIf="user && user.friends ">
+            <app-contact class="col-12" *ngFor="let fr of user.friends | search: query; let i = index" [uid]="fr"></app-contact>
         </ng-container>
     </div>
 </div>
