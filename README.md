@@ -336,5 +336,15 @@ electron-packager ./ <nombre-de-la-app> --platform=<plataforma> --icon <ubicacio
 El parámetro <plataforma> puede tomar los valores: win32 (para SO Windows) o darwin (para MacOS)
 
 ```
+ npm run electron
 electron-packager ./ Messenger --platfrom=win32 --icon src/assets/img/logo_live.ico
+electron-packager ./ Messenger --platfrom=darwin --icon src/assets/img/logo_live.ico
 ```
+### Exportando app para web, complementando con Firebase Hosting
+Para hacer el deploy de nuestra app hacia la web, usaremos el servicio de hosting gratuito de Firebase, para lo cual sólo es necesario seguir los siguientes pasos:
+
+Instalar las Firebase tools con npm install -g firebase-tools
+Hacer login desde la terminal con firebase login
+Inicializar el directorio del proyecto con firebase init
+y realizar el despliege con firebase deploy
+Al finalizar el proceso de deploy, Firebase nos indicará la url en la que se ha hecho la publicación. Esta url será servida de manera segura a través de https por Firebase.
