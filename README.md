@@ -274,3 +274,15 @@ Enviando un mensaje (con reproducción de sonido)
 Para el manejo de la conversación en nuestra app, crearemos un servicio llamado conversation, usando el Angular CLI. Usaremos el servicio de base de datos en tiempo real de Firebase a través del objeto AngularFireDatabase inyectado a nuestro servicio en el constructor.
 
 Cada mensaje estará identificado con un timestamp del momento en que se generó y una clave única formada por el user.uid de los dos usuarios que intervienen en la conversación, ordenados con sort() y concatenados con join().
+
+
+### Enviando un zumbido (con reproducción de sonido y animación)
+El envío de zumbidos está compuesto de varios aspectos: un mensaje informando que alguien envió un zumbido, la reproducción de un sonido particular y la animación de la pantalla.
+Para esto crearemos un par de métodos nuevos en nuestro servicio conversation, llamados: sendZumbido() y doZumbido().
+
+La animación será aplicada al elemento del html con la directiva [ngClass] y una clase .shaker que implementa animcaiones de CSS. Esta clase será aplicada al html sólo cuando se cumpla la expresión buleana que indica que el tipo de mensaje es un zumbido.
+
+### Planeación previa para la característica, ¿cómo generaremos las solicitudes?
+Para implementar la característica de solicitudes de amistad usaremos un par de nodos adicionales en la base de datos de Firebase: friends y requests. El nodo friends formará parte de los atributos propios de cada usuario.
+
+Los usuarios sólo podrán comunicarse entre sí sólo cuando se encuentren relacionados como amigos.
