@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  operation: string =  'register'
+  operation: string =  'login'
   email: string = null
   password: string = null
   nick: string = null
-  constructor(private authenticationService: AuthenticationService, 
+  constructor(private authenticationService: AuthenticationService,
     private userService: UserService,
     private router: Router) { }
 
@@ -47,6 +47,9 @@ export class LoginComponent implements OnInit {
       }).catch((e) => alert(e))
 
     }).catch((e) => alert(e))
+  }
+  changeOperation(value) {
+    this.operation = value
   }
 
 }

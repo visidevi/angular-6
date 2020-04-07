@@ -4,6 +4,7 @@ import  { User } from '../interfaces/user'
 import { UserService } from '../services/user.service';
 import { ConversationService } from '../services/conversation.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-conversation',
@@ -11,18 +12,23 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./conversation.component.scss']
 })
 export class ConversationComponent implements OnInit {
+  [x: string]: any;
   friendId: any;
   friend: User;
   user: User;
   conversation_id: string;
-  textMessage: string;
-  conversation: any = []
+  textMessage: string = '';
+  conversation: any = [];
+  shake: boolean = false;
+  croppedImage: any = '';
+  picture: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private conversationService: ConversationService,
-    private authenticationService: AuthenticationService ) {
+    private authenticationService: AuthenticationService,
+    private firebaseStorage: AngularFireStorage ) {
     this.friendId = this.activatedRoute.snapshot.params.uid;
 
     this.authenticationService.getStatus().subscribe((session) => {
@@ -54,7 +60,8 @@ export class ConversationComponent implements OnInit {
       timestamp: Date.now(),
       text: this.textMessage,
       sender: this.user.uid,
-      reciver: this.friend.uid
+      receiver: this.friend.uid,
+      type: 'text',
     }
     this.conversationService.createConversation(message).then(() => {
       this.textMessage = ''
@@ -67,8 +74,12 @@ export class ConversationComponent implements OnInit {
         if (!message.seen) {
           message.seen = true,
             this.conversationService.editConversation(message);
-          const audio = new Audio('assets/sound/new_message.m4a')
-          audio.play()
+          if (message.type != "zumbido") {
+            const audio = new Audio('assets/sound/new_message.m4a')
+            audio.play()
+          } else if (message.type === "zumbido") {
+            this.doZumbido()
+          }
         }
       })
     }), (e) => {
@@ -81,5 +92,72 @@ export class ConversationComponent implements OnInit {
     } else {
       return this.user.nick
      }
-   }
+  }
+  sendZumbido() {
+    const message = {
+      uid: this.conversation_id,
+      timestamp: Date.now(),
+      text: `${this.user.nick} ha enviado un zumbido`,
+      sender: this.user.uid,
+      receiver: this.friend.uid,
+      type: 'zumbido',
+    }
+    console.log(message.type)
+    this.conversationService.createConversation(message).then(() => { })
+    this.doZumbido()
+  }
+  doZumbido() {
+    const audio = new Audio('assets/sound/zumbido.m4a')
+    audio.play()
+    this.shake = true;
+    window.setTimeout(() => {
+      this.shake = false;
+    }, 1000)
+  }
+  sendPicture() {
+    const currentPictureId = Date.now();
+    const pictures = this.firebaseStorage.ref(`pictures/${currentPictureId}.jpg`).putString(this.croppedImage, 'data_url');
+    pictures.then((result) => {
+      console.log(result)
+      this.picture = this.firebaseStorage.ref(`pictures/${currentPictureId}.jpg`).getDownloadURL();
+      this.picture.subscribe((pic) => {
+        const message = {
+          uid: this.conversation_id,
+          timestamp: Date.now(),
+          text: this.textMessage,
+          sender: this.user.uid,
+          receiver: this.friend.uid,
+          type: 'image',
+          url: pic,
+        }
+        this.croppedImage = ''
+        this.conversationService.createConversation(message).then(() => { })
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
+
+  }
+  changeListener(e): void {
+    var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+    var pattern = /image-*/;
+    var reader = new FileReader();
+
+    if (!file.type.match(pattern)) {
+      alert('invalid format');
+      return;
+    }
+    this.loaded = false;
+    reader.onload = this._handleReaderLoaded.bind(this);
+    reader.readAsDataURL(file);
+  }
+  _handleReaderLoaded(e) {
+    console.log("_handleReaderLoaded")
+    var reader = e.target;
+    this.croppedImage = reader.result;
+    this.loaded = true;
+    this.sendPicture()
+
+  }
+
 }

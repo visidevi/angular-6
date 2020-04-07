@@ -1,5 +1,6 @@
 <!-- Router  -->
 <app-menu *ngIf="router.url != '/login'"></app-menu>
 <div [ngClass]="{'generalContent': router.url != '/login' }">
+    <app-request *ngIf="router.url != '/login'" [parentSubject]="parentSubject"></app-request>
     <router-outlet></router-outlet>
 </div>

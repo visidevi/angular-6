@@ -1,38 +1,27 @@
-.status{
+.status {
     width: 20px;
 }
+
 .profileContainer {
     background-image: url(/assets/img/msnbg.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
 }
-.whiteBorderBox{
+
+.whiteBorderBox {
     border: 2px solid rgba(255, 255, 255, .75);
     padding: 8px;
 }
+
 .profileHeadContainer {
-    background-color:  rgba(255, 255, 255, .50);
+    background-color: rgba(255, 255, 255, .50);
 }
 
-.whiteContainerPadded{
+.whiteContainerPadded {
     padding: 15px;
     background-color: #feffff;
 }
+
 img.icon {
     width: 30px;
 }
-
-.upload-btn-wrapper {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-  }
-  
-
-  .upload-btn-wrapper input[type=file] {
-    font-size: 100px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-  }

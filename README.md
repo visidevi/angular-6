@@ -286,3 +286,55 @@ La animación será aplicada al elemento del html con la directiva [ngClass] y u
 Para implementar la característica de solicitudes de amistad usaremos un par de nodos adicionales en la base de datos de Firebase: friends y requests. El nodo friends formará parte de los atributos propios de cada usuario.
 
 Los usuarios sólo podrán comunicarse entre sí sólo cuando se encuentren relacionados como amigos.
+### Aceptando solicitudes de amistad
+Generando el modal de solicitud de amistad
+Para implementar el modal de solicitud de amistad, usaremos una nueva librería llamada ng2-boostrap-modal.
+
+Importaremos el módulo BoostrapModalModule en el app.component.ts con forRoot() y no en el componente específico de conversation para que el modal pueda ser mostrado en cualquier pantalla de la app en la que estemos y no sólo durante una conversación.
+
+Crearemos un nuevo componente para esta ventana modal utilizando el Angular CLI: ng generate component modals/request, este componente extiende funcionalidades de DialogComponent e implementa PromptModel, que es una interface que tendremos que definir.
+
+Finalmente creamos un nuevo método en el userService llamado addFriend() que insertará en el registro de cada usuario, el user.uid de cada cual, para establecer la relación de amistad entre ellos.
+
+### Mostrando sólo contactos que son amigos
+Aceptando solicitudes de amistad
+Las solicitudes de amistad que ha recibido el usuario se obtendrán de la base de datos usando la dirección de correo del usuario actual. Se extraerán los registros del nodo requests y serán guardados localmente en un arreglo; luego, recorriendo este arreglo, se mostrará en el modal la lista de solicitudes pendientes, así el usuario pueda tomar la decisión de aceptarlas, rechazarlas o postergarlas. Para ello usaremos el componente que creamos en la clase anterior: requestsComponent.
+
+El estatus actualizado se guardará de nuevo en la base de datos.
+t
+### Componentes anidados (con paso de parámetros)
+Como ya vimos en las primeras clases del curso, los componentes en Angular, pueden contener internamente a otros componentes. A éstos se les denomina componentes anidados.
+
+Para poder utilizar información proveniente de un componente externo en uno anidado, es necesario incluir en este último el decorador @Input. Al incluir el nuevo componente en el html del componente padre, deberá pasarse, a través de un atributo colocado entre corchetes “”[ ]"", el valor indicado en el decorador @Input.
+
+
+### Creando un wrapper para desktop, usando Electron
+Electron es un framework muy potente que nos permite encapsular nuestras aplicaciones de Angular en wrappers nativos para sistemas operativos de escritorio como Windows, MacOS o Linux. Incluso podremos generar los paquetes de instalación, también nativos, para cada sistema operativo con otra herramienta llamada electron-packager.
+
+Electron debe ser instalado mediante npm:
+
+npm install electron --save-exact
+# For use in npm scripts (recommended)
+
+npm install electron-packager --save-dev
+S
+# For use from the CLI
+
+npm install electron-packager -g
+
+Una vez instalado el paquete, tendremos que crear un archivo llamado main.js en el directorio raíz de nuestra aplicación y referenciarlo en el archivo package.json de nuestra app con el atributo ““main””. En este archivo debemos importar los objetos app y BrowserWindow, además de crear los valores de configuración y la función createWindow(), necesarios para generar la aplicación.
+
+Definimos los manejadores de los eventos ‘ready’, ‘window-close-all’ y ‘activate’ que enlazarán a la función createWindow() y a las instrucciones necesarias para liberar la memoria de los recursos reservados por la aplicación cuando ésta haya sido cerrada o reactivar si se ha minimizado, respectivamente.
+
+En el sistema operativo MacOS hay una particularidad, y es que al cerrar la ventana de una aplicación, ésta continúa ejecutándose en segundo plano, por lo que es necesario tener en cuenta esta salvedad en nuestro código para que la aplicación tenga un comportamiento esperado en cada uno de los sistemas operativos.
+
+Finalmente generamos el paquete de producción de nuestra aplicación con el comando de Angular CLI: ng build --prod, generando la carpeta dist/ con los archivos y recursos optimizados y comprimidos para el ambiente de producción y por último el comando electron .
+
+Para generar el paquete de instalación debemos ejecutar:
+
+electron-packager ./ <nombre-de-la-app> --platform=<plataforma> --icon <ubicacion-icono>
+El parámetro <plataforma> puede tomar los valores: win32 (para SO Windows) o darwin (para MacOS)
+
+```
+electron-packager ./ Messenger --platfrom=win32 --icon src/assets/img/logo_live.ico
+```

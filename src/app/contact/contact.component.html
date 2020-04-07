@@ -1,0 +1,12 @@
+<div *ngIf="contact" class="d-flex  align-items-center">
+    <p [ngSwitch]="contact.status" class="my-3">
+        <a routerLink="/conversation/{{contact.uid}}">
+            <img *ngSwitchCase="'online'" src="assets/img/logo_live_online.png" class="img-fluid icon status mr-2">
+            <img *ngSwitchCase="'offline'" src="assets/img/logo_live_offline.png" class="img-fluid icon status mr-2">
+            <img *ngSwitchCase="'busy'" src="assets/img/logo_live_busy.png" class="img-fluid icon status mr-2">
+            <img *ngSwitchCase="'away'" src="assets/img/logo_live_away.png" class="img-fluid icon status mr-2">
+            <strong>{{contact.nick}}</strong> - {{contact.subnick || 'noSubNick' }} | {{ contact.status }}|
+            <small>{{contact.email}}</small>
+        </a>
+    </p>
+</div>
